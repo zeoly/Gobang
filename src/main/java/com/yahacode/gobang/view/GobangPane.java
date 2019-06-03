@@ -1,8 +1,10 @@
-package com.yahacode.gobang;
+package com.yahacode.gobang.view;
 
+import com.yahacode.gobang.core.GobangBoard;
 import com.yahacode.gobang.consts.GobangConst;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -29,8 +31,8 @@ public class GobangPane extends Pane {
         graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         graphicsContext.setStroke(Color.BLACK);
 
-        for (int i = 0; i < GobangConst.GRID_NUM; i++) {
-            for (int j = 0; j < GobangConst.GRID_NUM; j++) {
+        for (int i = 0; i < GobangConst.GRID_NUM - 1; i++) {
+            for (int j = 0; j < GobangConst.GRID_NUM - 1; j++) {
                 graphicsContext.strokeRect(100 + i * GobangConst.GRID_WIDTH, 100 + j * GobangConst.GRID_WIDTH,
                         GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
             }
@@ -47,7 +49,17 @@ public class GobangPane extends Pane {
             } else {
                 drawWhitePiece(i, j);
             }
+            System.out.println(i + "," + j + " " + result);
 
+            if (gobangBoard.isWin(i, j, result)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("五子棋游戏");
+                alert.setHeaderText("提示信息");
+                alert.setContentText(result + "方取得胜利！");
+
+                alert.showAndWait();
+
+            }
         }
     }
 

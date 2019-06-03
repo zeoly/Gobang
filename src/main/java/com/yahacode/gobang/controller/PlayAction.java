@@ -1,6 +1,7 @@
-package com.yahacode.gobang;
+package com.yahacode.gobang.controller;
 
 import com.yahacode.gobang.consts.GobangConst;
+import com.yahacode.gobang.view.GobangPane;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
