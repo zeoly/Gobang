@@ -13,5 +13,5 @@ public class GobangConst {
 
     public static final double GRID_WIDTH = 28;
 
-    public static final double GRID_NUM = 20;
+    public static final int GRID_NUM = 20;
 }

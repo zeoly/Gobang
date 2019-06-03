@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 public class GobangApplication extends Application {
 
     public void start(Stage primaryStage) throws Exception {
-        GobangPane gobangPane = new GobangPane();
+        GobangBoard gobangBoard = new GobangBoard(GobangConst.GRID_NUM, GobangConst.GRID_NUM);
+        GobangPane gobangPane = new GobangPane(gobangBoard);
+        gobangPane.setOnMouseClicked(new PlayAction(gobangPane));
 
         Scene scene = new Scene(gobangPane, GobangConst.WIDTH, GobangConst.HEIGHT);
         primaryStage.setScene(scene);
