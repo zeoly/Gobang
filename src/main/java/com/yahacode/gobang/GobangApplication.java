@@ -6,6 +6,8 @@ import com.yahacode.gobang.core.GobangBoard;
 import com.yahacode.gobang.view.GobangPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.stage.Stage;
 
 /**
@@ -14,6 +16,9 @@ import javafx.stage.Stage;
 public class GobangApplication extends Application {
 
     public void start(Stage primaryStage) throws Exception {
+        Menu menu = new Menu("开始");
+        MenuBar menuBar = new MenuBar(menu);
+
         GobangBoard gobangBoard = new GobangBoard(GobangConst.GRID_NUM);
         GobangPane gobangPane = new GobangPane(gobangBoard);
         gobangPane.setOnMouseClicked(new PlayAction(gobangPane));

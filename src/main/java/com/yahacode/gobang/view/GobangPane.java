@@ -25,24 +25,28 @@ public class GobangPane extends Pane {
     }
 
     private void drawPane() {
-        canvas = new Canvas(GobangConst.WIDTH, GobangConst.HEIGHT);
-        graphicsContext = canvas.getGraphicsContext2D();
+        if (gobangBoard.isRunning()) {
+            canvas = new Canvas(GobangConst.WIDTH, GobangConst.HEIGHT);
+            graphicsContext = canvas.getGraphicsContext2D();
 
-        graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        graphicsContext.setStroke(Color.BLACK);
+            graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            graphicsContext.setStroke(Color.BLACK);
+            graphicsContext.setFill(Color.rgb(213, 176, 146));
+            graphicsContext.fillRect(90, 90, GobangConst.GRID_WIDTH * (GobangConst.GRID_NUM - 1) + 20,
+                    GobangConst.GRID_WIDTH * (GobangConst.GRID_NUM - 1) + 20);
 
-        for (int i = 0; i < GobangConst.GRID_NUM - 1; i++) {
-            for (int j = 0; j < GobangConst.GRID_NUM - 1; j++) {
-                graphicsContext.strokeRect(100 + i * GobangConst.GRID_WIDTH, 100 + j * GobangConst.GRID_WIDTH,
-                        GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
+            for (int i = 0; i < GobangConst.GRID_NUM - 1; i++) {
+                for (int j = 0; j < GobangConst.GRID_NUM - 1; j++) {
+                    graphicsContext.strokeRect(100 + i * GobangConst.GRID_WIDTH, 100 + j * GobangConst.GRID_WIDTH,
+                            GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
+                }
             }
+            getChildren().add(canvas);
         }
-
-        getChildren().add(canvas);
     }
 
     public void drawPiece(int i, int j) {
-        if (canDraw(i, j)) {
+        if (canDrawPiece(i, j)) {
             char result = gobangBoard.play(i, j);
             if (result == 'B') {
                 drawBlackPiece(i, j);
@@ -53,7 +57,7 @@ public class GobangPane extends Pane {
 
             if (gobangBoard.isWin(i, j, result)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("五子棋游戏");
+                alert.setTitle(GobangConst.TITLE);
                 alert.setHeaderText("提示信息");
                 alert.setContentText(result + "方取得胜利！");
 
@@ -63,8 +67,8 @@ public class GobangPane extends Pane {
         }
     }
 
-    private boolean canDraw(int i, int j) {
-        return (gobangBoard.getBoard()[i][j] == ' ');
+    private boolean canDrawPiece(int i, int j) {
+        return gobangBoard.canPlay(i, j);
     }
 
     private void drawBlackPiece(int i, int j) {
@@ -77,7 +81,5 @@ public class GobangPane extends Pane {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillOval(100 + (i - 0.5) * GobangConst.GRID_WIDTH, 100 + (j - 0.5) * GobangConst.GRID_WIDTH,
                 GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
-        graphicsContext.strokeOval(100 + (i - 0.5) * GobangConst.GRID_WIDTH, 100 + (j - 0.5) * GobangConst.GRID_WIDTH
-                , GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
     }
 }
