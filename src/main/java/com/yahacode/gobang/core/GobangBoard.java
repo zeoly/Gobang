@@ -9,6 +9,8 @@ public class GobangBoard {
 
     private boolean running;
 
+    private int step;
+
     private int width;
 
     private Piece[][] board;
@@ -17,6 +19,7 @@ public class GobangBoard {
 
     public GobangBoard(int width) {
         this.width = width;
+        this.step = 0;
 
         this.board = new Piece[width][width];
         for (int i = 0; i < width; i++) {
@@ -69,6 +72,7 @@ public class GobangBoard {
     public Piece play(int i, int j) {
         this.board[i][j] = currentPiece;
         changeSide();
+        step++;
         return this.board[i][j];
     }
 
@@ -183,5 +187,9 @@ public class GobangBoard {
 
     public void endBoard() {
         this.running = false;
+    }
+
+    public int getStep(){
+        return this.step;
     }
 }

@@ -62,7 +62,7 @@ public class GobangPane extends Pane {
             } else {
                 drawWhitePiece(i, j);
             }
-            System.out.println(i + "," + j + " " + result);
+            System.out.println("step " + gobangBoard.getStep() + ": " + i + "," + j + " " + result);
 
             if (gobangBoard.isWin(i, j, result)) {
                 gobangBoard.endBoard();
@@ -92,5 +92,9 @@ public class GobangPane extends Pane {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillOval(GobangConst.PADDING + (i - 0.5) * GobangConst.GRID_WIDTH, GobangConst.PADDING + (j - 0.5) * GobangConst.GRID_WIDTH,
                 GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
+    }
+
+    public GobangBoard getGobangBoard() {
+        return this.gobangBoard;
     }
 }
