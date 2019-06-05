@@ -11,17 +11,17 @@ public class GobangBoard {
 
     private int width;
 
-    private char[][] board;
+    private Piece[][] board;
 
     private Piece currentPiece = Piece.BLACK;
 
     public GobangBoard(int width) {
         this.width = width;
 
-        this.board = new char[width][width];
+        this.board = new Piece[width][width];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < width; j++) {
-                this.board[i][j] = ' ';
+                this.board[i][j] = null;
             }
         }
 
@@ -29,13 +29,13 @@ public class GobangBoard {
     }
 
     public boolean canPlay(int i, int j) {
-        return (this.running && this.board[i][j] == ' ');
+        return (this.running && this.board[i][j] == null);
     }
 
     public boolean canPlayWithBalanceBreaker(int i, int j) {
-        if (this.board[i][j] != ' ') {
+        if (this.board[i][j] != null) {
             return false;
-        } else if (isLongConnect(i, j, this.currentPiece.getCode())) {
+        } else if (isLongConnect(i, j, this.currentPiece)) {
             return false;
         }
         return true;
@@ -49,7 +49,7 @@ public class GobangBoard {
      * @param side
      * @return
      */
-    private boolean isLongConnect(int i, int j, char side) {
+    private boolean isLongConnect(int i, int j, Piece side) {
         if (piecesOfRow(i, j, side) > GobangConst.PIECES_OF_WIN) {
             return true;
         } else if (piecesOfColumn(i, j, side) > GobangConst.PIECES_OF_WIN) {
@@ -67,13 +67,12 @@ public class GobangBoard {
     }
 
     public Piece play(int i, int j) {
-        Piece playPiece = currentPiece;
-        this.board[i][j] = currentPiece.getCode();
+        this.board[i][j] = currentPiece;
         changeSide();
-        return playPiece;
+        return this.board[i][j];
     }
 
-    public boolean isWin(int i, int j, char side) {
+    public boolean isWin(int i, int j, Piece side) {
         if (piecesOfRow(i, j, side) >= 5) {
             System.out.println(side + " row pieces: " + piecesOfRow(i, j, side));
             return true;
@@ -90,7 +89,7 @@ public class GobangBoard {
         return false;
     }
 
-    private int piecesOfRow(int i, int j, char side) {
+    private int piecesOfRow(int i, int j, Piece side) {
         int counter = 1;
         for (int k = i + 1; k < this.width; k++) {
             if (this.board[k][j] == side) {
@@ -109,7 +108,7 @@ public class GobangBoard {
         return counter;
     }
 
-    private int piecesOfColumn(int i, int j, char side) {
+    private int piecesOfColumn(int i, int j, Piece side) {
         int counter = 1;
         for (int k = j + 1; k < this.width; k++) {
             if (this.board[i][k] == side) {
@@ -128,7 +127,7 @@ public class GobangBoard {
         return counter;
     }
 
-    private int piecesOfLeftDiagonal(int i, int j, char side) {
+    private int piecesOfLeftDiagonal(int i, int j, Piece side) {
         int counter = 1;
         for (int k = i - 1, l = j - 1; k >= 0 && l >= 0; k--, l--) {
             if (this.board[k][l] == side) {
@@ -147,7 +146,7 @@ public class GobangBoard {
         return counter;
     }
 
-    private int piecesOfRightDiagonal(int i, int j, char side) {
+    private int piecesOfRightDiagonal(int i, int j, Piece side) {
         int counter = 1;
         for (int k = i + 1, l = j - 1; k < this.width && l >= 0; k++, l--) {
             if (this.board[k][l] == side) {
@@ -170,7 +169,7 @@ public class GobangBoard {
         this.currentPiece = (this.currentPiece == Piece.BLACK ? Piece.WHITE : Piece.BLACK);
     }
 
-    public char[][] getBoard() {
+    public Piece[][] getBoard() {
         return this.board;
     }
 

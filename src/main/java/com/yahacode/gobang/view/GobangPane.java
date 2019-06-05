@@ -64,7 +64,7 @@ public class GobangPane extends Pane {
             }
             System.out.println(i + "," + j + " " + result);
 
-            if (gobangBoard.isWin(i, j, result.getCode())) {
+            if (gobangBoard.isWin(i, j, result)) {
                 gobangBoard.endBoard();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle(GobangConst.TITLE);

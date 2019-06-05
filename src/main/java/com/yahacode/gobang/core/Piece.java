@@ -2,30 +2,15 @@ package com.yahacode.gobang.core;
 
 public enum Piece {
 
-    BLACK('B', "黑棋"), WHITE('W', "白棋");
-
-    private char code;
+    BLACK("黑棋"), WHITE("白棋");
 
     private String name;
 
-    Piece(char code, String name) {
-        this.code = code;
+    Piece(String name) {
         this.name = name;
-    }
-
-    public char getCode() {
-        return code;
-    }
-
-    public void setCode(char code) {
-        this.code = code;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
