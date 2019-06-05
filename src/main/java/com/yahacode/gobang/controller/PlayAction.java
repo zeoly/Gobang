@@ -20,8 +20,8 @@ public class PlayAction implements EventHandler<MouseEvent> {
         double x = event.getX();
         double y = event.getY();
 
-        int i = (int) ((x - 100 + GobangConst.GRID_WIDTH / 2) / GobangConst.GRID_WIDTH);
-        int j = (int) ((y - 100 + GobangConst.GRID_WIDTH / 2) / GobangConst.GRID_WIDTH);
+        int i = (int) ((x - GobangConst.PADDING + GobangConst.GRID_WIDTH / 2) / GobangConst.GRID_WIDTH);
+        int j = (int) ((y - GobangConst.PADDING + GobangConst.GRID_WIDTH / 2) / GobangConst.GRID_WIDTH);
 
         gobangPane.drawPiece(i, j);
     }

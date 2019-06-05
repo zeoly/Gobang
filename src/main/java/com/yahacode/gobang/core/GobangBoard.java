@@ -13,7 +13,7 @@ public class GobangBoard {
 
     private char[][] board;
 
-    private char currentPiece = 'B';
+    private Piece currentPiece = Piece.BLACK;
 
     public GobangBoard(int width) {
         this.width = width;
@@ -29,13 +29,13 @@ public class GobangBoard {
     }
 
     public boolean canPlay(int i, int j) {
-        return this.board[i][j] == ' ';
+        return (this.running && this.board[i][j] == ' ');
     }
 
     public boolean canPlayWithBalanceBreaker(int i, int j) {
         if (this.board[i][j] != ' ') {
             return false;
-        } else if (isLongConnect(i, j, this.currentPiece)) {
+        } else if (isLongConnect(i, j, this.currentPiece.getCode())) {
             return false;
         }
         return true;
@@ -66,10 +66,11 @@ public class GobangBoard {
         return false;
     }
 
-    public char play(int i, int j) {
-        this.board[i][j] = currentPiece;
+    public Piece play(int i, int j) {
+        Piece playPiece = currentPiece;
+        this.board[i][j] = currentPiece.getCode();
         changeSide();
-        return this.board[i][j];
+        return playPiece;
     }
 
     public boolean isWin(int i, int j, char side) {
@@ -166,18 +167,22 @@ public class GobangBoard {
     }
 
     private void changeSide() {
-        this.currentPiece = (this.currentPiece == 'B' ? 'W' : 'B');
+        this.currentPiece = (this.currentPiece == Piece.BLACK ? Piece.WHITE : Piece.BLACK);
     }
 
     public char[][] getBoard() {
         return this.board;
     }
 
-    public char getCurrentPiece() {
+    public Piece getCurrentPiece() {
         return this.currentPiece;
     }
 
     public boolean isRunning() {
         return this.running;
+    }
+
+    public void endBoard() {
+        this.running = false;
     }
 }
