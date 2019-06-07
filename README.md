@@ -1,1 +1,9 @@
-https://blog.csdn.net/qq_40933929/article/details/88809085
+# Gobang
+
+Gobang game play with three mode:
+
+- user versus user
+- user versus computer
+- computer versus computer
+
+you can implement `Determination` interface and override `determine` method to create your own artificial intelligence.
