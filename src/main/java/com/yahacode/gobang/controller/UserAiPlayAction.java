@@ -29,7 +29,6 @@ public class UserAiPlayAction implements EventHandler<MouseEvent> {
         gobangPane.drawPiece(i, j);
 
         int[] next = determination.determine(gobangPane.getGobangBoard().getBoard(), Piece.WHITE);
-        System.out.println("ai move: " + next[0] + "," + next[1]);
         gobangPane.drawPiece(next[0], next[1]);
     }
 }
