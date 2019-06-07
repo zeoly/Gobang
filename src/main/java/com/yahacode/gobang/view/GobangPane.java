@@ -10,6 +10,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 /**
+ * 画布
+ *
  * @author zengyongli 2019-06-03
  */
 public class GobangPane extends Pane {

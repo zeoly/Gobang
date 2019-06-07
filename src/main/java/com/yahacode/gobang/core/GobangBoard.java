@@ -3,6 +3,8 @@ package com.yahacode.gobang.core;
 import com.yahacode.gobang.consts.GobangConst;
 
 /**
+ * 棋局
+ *
  * @author zengyongli 2019-06-03
  */
 public class GobangBoard {
@@ -189,7 +191,7 @@ public class GobangBoard {
         this.running = false;
     }
 
-    public int getStep(){
+    public int getStep() {
         return this.step;
     }
 }

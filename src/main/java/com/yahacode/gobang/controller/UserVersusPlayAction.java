@@ -16,6 +16,7 @@ public class UserVersusPlayAction implements EventHandler<MouseEvent> {
         this.gobangPane = gobangPane;
     }
 
+    @Override
     public void handle(MouseEvent event) {
         double x = event.getX();
         double y = event.getY();

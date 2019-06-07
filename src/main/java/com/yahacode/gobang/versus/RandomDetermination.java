@@ -6,7 +6,7 @@ import com.yahacode.gobang.core.Piece;
 public class RandomDetermination implements Determination {
 
     @Override
-    public int[] determine(Piece[][] board) {
+    public int[] determine(Piece[][] board, Piece piece) {
         int x = (int) (Math.random() * GobangConst.GRID_NUM);
         int y = (int) (Math.random() * GobangConst.GRID_NUM);
         while (board[x][y] != null) {

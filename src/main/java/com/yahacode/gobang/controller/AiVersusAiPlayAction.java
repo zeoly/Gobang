@@ -24,10 +24,10 @@ public class AiVersusAiPlayAction implements EventHandler<MouseEvent> {
     public void handle(MouseEvent event) {
         Piece[][] board = gobangPane.getGobangBoard().getBoard();
         if (gobangPane.getGobangBoard().getCurrentPiece() == Piece.BLACK) {
-            int[] next = blackDetermination.determine(board);
+            int[] next = blackDetermination.determine(board, Piece.BLACK);
             gobangPane.drawPiece(next[0], next[1]);
         } else {
-            int[] next = whiteDetermination.determine(board);
+            int[] next = whiteDetermination.determine(board, Piece.WHITE);
             gobangPane.drawPiece(next[0], next[1]);
         }
 

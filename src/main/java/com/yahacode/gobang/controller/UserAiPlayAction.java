@@ -1,6 +1,7 @@
 package com.yahacode.gobang.controller;
 
 import com.yahacode.gobang.consts.GobangConst;
+import com.yahacode.gobang.core.Piece;
 import com.yahacode.gobang.versus.Determination;
 import com.yahacode.gobang.view.GobangPane;
 import javafx.event.EventHandler;
@@ -27,7 +28,7 @@ public class UserAiPlayAction implements EventHandler<MouseEvent> {
 
         gobangPane.drawPiece(i, j);
 
-        int[] next = determination.determine(gobangPane.getGobangBoard().getBoard());
+        int[] next = determination.determine(gobangPane.getGobangBoard().getBoard(), Piece.WHITE);
         System.out.println("ai move: " + next[0] + "," + next[1]);
         gobangPane.drawPiece(next[0], next[1]);
     }
