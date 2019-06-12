@@ -17,12 +17,12 @@ public class GobangConst {
     /**
      * 单格宽度
      */
-    public static final int GRID_WIDTH = 50;
+    public static final int GRID_WIDTH = 30;
 
     /**
      * 画布边距
      */
-    public static final int PADDING = 50;
+    public static final int PADDING = 100;
 
     /**
      * 棋盘边距

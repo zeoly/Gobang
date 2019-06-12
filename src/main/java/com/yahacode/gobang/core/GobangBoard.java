@@ -21,6 +21,10 @@ public class GobangBoard {
 
     public GobangBoard(int width) {
         this.width = width;
+        init();
+    }
+
+    public void init() {
         this.step = 0;
 
         this.board = new Piece[width][width];
@@ -29,7 +33,6 @@ public class GobangBoard {
                 this.board[i][j] = null;
             }
         }
-
         this.running = true;
     }
 

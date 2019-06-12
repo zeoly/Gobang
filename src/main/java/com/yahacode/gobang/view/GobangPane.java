@@ -24,12 +24,18 @@ public class GobangPane extends Pane {
 
     public GobangPane(GobangBoard gobangBoard) {
         this.gobangBoard = gobangBoard;
+        canvas = new Canvas(GobangConst.WIDTH, GobangConst.HEIGHT);
+        drawPane();
+        getChildren().add(canvas);
+    }
+
+    public void reset(){
+        gobangBoard.init();
         drawPane();
     }
 
     private void drawPane() {
         if (gobangBoard.isRunning()) {
-            canvas = new Canvas(GobangConst.WIDTH, GobangConst.HEIGHT);
             graphicsContext = canvas.getGraphicsContext2D();
 
             graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -52,7 +58,6 @@ public class GobangPane extends Pane {
                             GobangConst.GRID_WIDTH / 3, GobangConst.GRID_WIDTH / 3);
                 }
             }
-            getChildren().add(canvas);
         }
     }
 
