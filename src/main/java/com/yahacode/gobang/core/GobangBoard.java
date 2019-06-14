@@ -15,7 +15,7 @@ public class GobangBoard {
 
     private int width;
 
-    private Piece[][] board;
+    private Move[][] board;
 
     private Piece currentPiece = Piece.BLACK;
 
@@ -27,7 +27,7 @@ public class GobangBoard {
     public void init() {
         this.step = 0;
 
-        this.board = new Piece[width][width];
+        this.board = new Move[width][width];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < width; j++) {
                 this.board[i][j] = null;
@@ -75,10 +75,9 @@ public class GobangBoard {
     }
 
     public Piece play(int i, int j) {
-        this.board[i][j] = currentPiece;
+        this.board[i][j] = new Move(currentPiece, ++step);
         changeSide();
-        step++;
-        return this.board[i][j];
+        return this.board[i][j].getPiece();
     }
 
     public boolean isWin(int i, int j, Piece side) {
@@ -101,14 +100,14 @@ public class GobangBoard {
     private int piecesOfRow(int i, int j, Piece side) {
         int counter = 1;
         for (int k = i + 1; k < this.width; k++) {
-            if (this.board[k][j] == side) {
+            if (this.board[k][j] != null && this.board[k][j].getPiece() == side) {
                 counter++;
             } else {
                 break;
             }
         }
         for (int k = i - 1; k >= 0; k--) {
-            if (this.board[k][j] == side) {
+            if (this.board[k][j] != null && this.board[k][j].getPiece() == side) {
                 counter++;
             } else {
                 break;
@@ -120,14 +119,14 @@ public class GobangBoard {
     private int piecesOfColumn(int i, int j, Piece side) {
         int counter = 1;
         for (int k = j + 1; k < this.width; k++) {
-            if (this.board[i][k] == side) {
+            if (this.board[i][k] != null && this.board[i][k].getPiece() == side) {
                 counter++;
             } else {
                 break;
             }
         }
         for (int k = j - 1; k >= 0; k--) {
-            if (this.board[i][k] == side) {
+            if (this.board[i][k] != null && this.board[i][k].getPiece() == side) {
                 counter++;
             } else {
                 break;
@@ -139,14 +138,14 @@ public class GobangBoard {
     private int piecesOfLeftDiagonal(int i, int j, Piece side) {
         int counter = 1;
         for (int k = i - 1, l = j - 1; k >= 0 && l >= 0; k--, l--) {
-            if (this.board[k][l] == side) {
+            if (this.board[k][l] != null && this.board[k][l].getPiece() == side) {
                 counter++;
             } else {
                 break;
             }
         }
         for (int k = i + 1, l = j + 1; k < width && l < width; k++, l++) {
-            if (this.board[k][l] == side) {
+            if (this.board[k][l] != null && this.board[k][l].getPiece() == side) {
                 counter++;
             } else {
                 break;
@@ -158,14 +157,14 @@ public class GobangBoard {
     private int piecesOfRightDiagonal(int i, int j, Piece side) {
         int counter = 1;
         for (int k = i + 1, l = j - 1; k < this.width && l >= 0; k++, l--) {
-            if (this.board[k][l] == side) {
+            if (this.board[k][l] != null && this.board[k][l].getPiece() == side) {
                 counter++;
             } else {
                 break;
             }
         }
         for (int k = i - 1, l = j + 1; k >= 0 && l < this.width; k--, l++) {
-            if (this.board[k][l] == side) {
+            if (this.board[k][l] != null && this.board[k][l].getPiece() == side) {
                 counter++;
             } else {
                 break;
@@ -178,7 +177,7 @@ public class GobangBoard {
         this.currentPiece = (this.currentPiece == Piece.BLACK ? Piece.WHITE : Piece.BLACK);
     }
 
-    public Piece[][] getBoard() {
+    public Move[][] getBoard() {
         return this.board;
     }
 
@@ -196,5 +195,9 @@ public class GobangBoard {
 
     public int getStep() {
         return this.step;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }

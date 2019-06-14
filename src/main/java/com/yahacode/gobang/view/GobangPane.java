@@ -8,6 +8,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 /**
  * 画布
@@ -22,6 +24,8 @@ public class GobangPane extends Pane {
 
     private GobangBoard gobangBoard;
 
+    private boolean showStep = false;
+
     public GobangPane(GobangBoard gobangBoard) {
         this.gobangBoard = gobangBoard;
         canvas = new Canvas(GobangConst.WIDTH, GobangConst.HEIGHT);
@@ -29,7 +33,7 @@ public class GobangPane extends Pane {
         getChildren().add(canvas);
     }
 
-    public void reset(){
+    public void reset() {
         gobangBoard.init();
         drawPane();
     }
@@ -37,6 +41,8 @@ public class GobangPane extends Pane {
     private void drawPane() {
         if (gobangBoard.isRunning()) {
             graphicsContext = canvas.getGraphicsContext2D();
+            graphicsContext.setFont(new Font(GobangConst.STEP_FONT_SIZE));
+            graphicsContext.setTextAlign(TextAlignment.CENTER);
 
             graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             graphicsContext.setStroke(Color.BLACK);
@@ -90,18 +96,48 @@ public class GobangPane extends Pane {
     }
 
     private void drawBlackPiece(int i, int j) {
+        double x = GobangConst.PADDING + (i - 0.5) * GobangConst.GRID_WIDTH;
+        double y = GobangConst.PADDING + (j - 0.5) * GobangConst.GRID_WIDTH;
         graphicsContext.setFill(Color.BLACK);
-        graphicsContext.fillOval(GobangConst.PADDING + (i - 0.5) * GobangConst.GRID_WIDTH, GobangConst.PADDING + (j - 0.5) * GobangConst.GRID_WIDTH,
-                GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
+        graphicsContext.fillOval(x, y, GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
+        if (showStep) {
+            graphicsContext.setFill(Color.RED);
+            graphicsContext.fillText(String.valueOf(gobangBoard.getBoard()[i][j].getStep()), x + 0.5 * GobangConst.GRID_WIDTH, y + 0.5 * GobangConst.GRID_WIDTH + GobangConst.STEP_FONT_SIZE / 2);
+        }
     }
 
     private void drawWhitePiece(int i, int j) {
+        double x = GobangConst.PADDING + (i - 0.5) * GobangConst.GRID_WIDTH;
+        double y = GobangConst.PADDING + (j - 0.5) * GobangConst.GRID_WIDTH;
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillOval(GobangConst.PADDING + (i - 0.5) * GobangConst.GRID_WIDTH, GobangConst.PADDING + (j - 0.5) * GobangConst.GRID_WIDTH,
-                GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
+        graphicsContext.fillOval(x, y, GobangConst.GRID_WIDTH, GobangConst.GRID_WIDTH);
+        if (showStep) {
+            graphicsContext.setFill(Color.RED);
+            graphicsContext.fillText(String.valueOf(gobangBoard.getBoard()[i][j].getStep()), x + 0.5 * GobangConst.GRID_WIDTH, y + 0.5 * GobangConst.GRID_WIDTH + GobangConst.STEP_FONT_SIZE / 2);
+        }
+    }
+
+    public void refresh() {
+        for (int i = 0; i < gobangBoard.getWidth(); i++) {
+            for (int j = 0; j < gobangBoard.getWidth(); j++) {
+                if (gobangBoard.getBoard()[i][j] != null && gobangBoard.getBoard()[i][j].getPiece() == Piece.BLACK) {
+                    drawBlackPiece(i, j);
+                } else if (gobangBoard.getBoard()[i][j] != null && gobangBoard.getBoard()[i][j].getPiece() == Piece.WHITE) {
+                    drawWhitePiece(i, j);
+                }
+            }
+        }
     }
 
     public GobangBoard getGobangBoard() {
         return this.gobangBoard;
+    }
+
+    public boolean isShowStep() {
+        return showStep;
+    }
+
+    public void setShowStep(boolean showStep) {
+        this.showStep = showStep;
     }
 }

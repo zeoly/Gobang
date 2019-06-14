@@ -1,12 +1,13 @@
 package com.yahacode.gobang.versus;
 
 import com.yahacode.gobang.consts.GobangConst;
+import com.yahacode.gobang.core.Move;
 import com.yahacode.gobang.core.Piece;
 
 public class RandomDetermination implements Determination {
 
     @Override
-    public int[] determine(Piece[][] board, Piece piece) {
+    public int[] determine(Move[][] board, Piece piece) {
         int x = (int) (Math.random() * GobangConst.GRID_NUM);
         int y = (int) (Math.random() * GobangConst.GRID_NUM);
         while (board[x][y] != null) {

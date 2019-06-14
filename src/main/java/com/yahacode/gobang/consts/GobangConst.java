@@ -17,7 +17,12 @@ public class GobangConst {
     /**
      * 单格宽度
      */
-    public static final int GRID_WIDTH = 30;
+    public static final int GRID_WIDTH = 50;
+
+    /**
+     * 步数字体大小
+     */
+    public static final int STEP_FONT_SIZE = GRID_WIDTH / 2;
 
     /**
      * 画布边距

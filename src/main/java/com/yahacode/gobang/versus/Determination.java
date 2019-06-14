@@ -1,5 +1,6 @@
 package com.yahacode.gobang.versus;
 
+import com.yahacode.gobang.core.Move;
 import com.yahacode.gobang.core.Piece;
 
 /**
@@ -16,6 +17,6 @@ public interface Determination {
      * @param piece 当前待下棋子
      * @return 坐标
      */
-    int[] determine(Piece[][] board, Piece piece);
+    int[] determine(Move[][] board, Piece piece);
 
 }

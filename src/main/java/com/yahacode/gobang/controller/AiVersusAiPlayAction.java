@@ -1,5 +1,6 @@
 package com.yahacode.gobang.controller;
 
+import com.yahacode.gobang.core.Move;
 import com.yahacode.gobang.core.Piece;
 import com.yahacode.gobang.versus.Determination;
 import com.yahacode.gobang.view.GobangPane;
@@ -22,7 +23,7 @@ public class AiVersusAiPlayAction implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
-        Piece[][] board = gobangPane.getGobangBoard().getBoard();
+        Move[][] board = gobangPane.getGobangBoard().getBoard();
         if (gobangPane.getGobangBoard().getCurrentPiece() == Piece.BLACK) {
             int[] next = blackDetermination.determine(board, Piece.BLACK);
             gobangPane.drawPiece(next[0], next[1]);

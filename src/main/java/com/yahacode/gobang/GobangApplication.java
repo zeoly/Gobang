@@ -1,15 +1,13 @@
 package com.yahacode.gobang;
 
 import com.yahacode.gobang.consts.GobangConst;
-import com.yahacode.gobang.controller.AiVersusAiPlayAction;
-import com.yahacode.gobang.controller.UserAiPlayAction;
 import com.yahacode.gobang.controller.UserVersusPlayAction;
 import com.yahacode.gobang.core.GobangBoard;
-import com.yahacode.gobang.versus.RandomDetermination;
 import com.yahacode.gobang.view.GobangPane;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -31,15 +29,7 @@ public class GobangApplication extends Application {
 
         Scene scene = new Scene(gobangPane, GobangConst.WIDTH, GobangConst.HEIGHT);
 
-        Menu fileMenu = new Menu("开始");
-        MenuItem newMenuItem = new MenuItem("新局");
-        MenuItem exitMenuItem = new MenuItem("退出");
-        newMenuItem.setOnAction(event -> gobangPane.reset());
-        exitMenuItem.setOnAction(event -> Platform.exit());
-        fileMenu.getItems().addAll(newMenuItem, exitMenuItem);
-
-        MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(fileMenu);
+        MenuBar menuBar = buildMenuBar(gobangPane);
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 
         ((Pane) scene.getRoot()).getChildren().addAll(menuBar);
@@ -47,5 +37,26 @@ public class GobangApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle(GobangConst.TITLE);
         primaryStage.show();
+    }
+
+    private MenuBar buildMenuBar(GobangPane pane) {
+        Menu fileMenu = new Menu("开始");
+        MenuItem newMenuItem = new MenuItem("新局");
+        MenuItem exitMenuItem = new MenuItem("退出");
+        newMenuItem.setOnAction(event -> pane.reset());
+        exitMenuItem.setOnAction(event -> Platform.exit());
+        fileMenu.getItems().addAll(newMenuItem, exitMenuItem);
+
+        Menu settingMenu = new Menu("设置");
+        CheckMenuItem showStepMenuItem = new CheckMenuItem("显示步数");
+        showStepMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            pane.setShowStep(newValue);
+            pane.refresh();
+        });
+        settingMenu.getItems().addAll(showStepMenuItem);
+
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().addAll(fileMenu, settingMenu);
+        return menuBar;
     }
 }
