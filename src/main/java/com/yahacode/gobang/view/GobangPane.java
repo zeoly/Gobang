@@ -18,6 +18,10 @@ import javafx.scene.text.TextAlignment;
  */
 public class GobangPane extends Pane {
 
+    private int width;
+
+    private int height;
+
     private Canvas canvas;
 
     private GraphicsContext graphicsContext;
@@ -26,9 +30,11 @@ public class GobangPane extends Pane {
 
     private boolean showStep = false;
 
-    public GobangPane(GobangBoard gobangBoard) {
+    public GobangPane(GobangBoard gobangBoard, int width, int height) {
         this.gobangBoard = gobangBoard;
-        canvas = new Canvas(GobangConst.WIDTH, GobangConst.HEIGHT);
+        this.width = width;
+        this.height = height;
+        canvas = new Canvas(width, height);
         drawPane();
         getChildren().add(canvas);
     }
@@ -140,4 +146,5 @@ public class GobangPane extends Pane {
     public void setShowStep(boolean showStep) {
         this.showStep = showStep;
     }
+
 }

@@ -81,16 +81,16 @@ public class GobangBoard {
     }
 
     public boolean isWin(int i, int j, Piece side) {
-        if (piecesOfRow(i, j, side) >= 5) {
+        if (piecesOfRow(i, j, side) >= GobangConst.PIECES_OF_WIN) {
             System.out.println(side + " row pieces: " + piecesOfRow(i, j, side));
             return true;
-        } else if (piecesOfColumn(i, j, side) >= 5) {
+        } else if (piecesOfColumn(i, j, side) >= GobangConst.PIECES_OF_WIN) {
             System.out.println(side + " column pieces: " + piecesOfColumn(i, j, side));
             return true;
-        } else if (piecesOfLeftDiagonal(i, j, side) >= 5) {
+        } else if (piecesOfLeftDiagonal(i, j, side) >= GobangConst.PIECES_OF_WIN) {
             System.out.println(side + " left diagonal pieces: " + piecesOfLeftDiagonal(i, j, side));
             return true;
-        } else if (piecesOfRightDiagonal(i, j, side) >= 5) {
+        } else if (piecesOfRightDiagonal(i, j, side) >= GobangConst.PIECES_OF_WIN) {
             System.out.println(side + " right diagonal pieces: " + piecesOfRightDiagonal(i, j, side));
             return true;
         }
